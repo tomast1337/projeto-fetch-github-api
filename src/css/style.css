@@ -115,7 +115,7 @@ section{
     line-height: 23px;
 }
 
-/* FALLOWERS AND FALLOWING */
+/* FOLLOWERS AND FALLOWING */
 
 .container .profile-data .info .followers-following{
     text-align: center;
@@ -154,7 +154,7 @@ section{
     color: #fff;
 }
 
-.container .profile-data .info .followers-following ul li .fallowers,
+.container .profile-data .info .followers-following ul li .followers,
 .container .profile-data .info .followers-following ul li .fallowing{
     padding-top: 10px;
     font-size: 15px;
@@ -196,7 +196,7 @@ section{
     display: none;
 }
 
-/* REPOSITORIIES INFO */
+/* REPOSITORIES INFO */
 .repositories-info{
     border: 1px solid gray;
     border-radius: 5px;

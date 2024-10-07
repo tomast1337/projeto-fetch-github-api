@@ -1,6 +1,6 @@
 const screen = {
     userProfile: document.querySelector('.profile-data'),
-    renderUser(user){
+    renderUser(user) {
         this.userProfile.innerHTML = `<div class="info">
                                         <img src="${user.avatarUrl}" alt="Foto do perfil do usuário" />
                                             <div class="data">
@@ -12,7 +12,7 @@ const screen = {
                                                 <ul>
                                                     <li>
                                                         <span class="number">${user.followers}</span>
-                                                        <span class="fallowers">Fallowers</span>
+                                                        <span class="followers">Followers</span>
                                                     </li>
                                                     <li>
                                                         <span class="number">${user.following}</span>
@@ -36,31 +36,31 @@ const screen = {
                                     </ul>
                                   </li>`
         })
-                              
-        if(user.repositories.length > 0){
+
+        if (user.repositories.length > 0) {
             this.userProfile.innerHTML += `<div class="repositories section">
                                                 <h2>Repositórios</h2>
                                                 <ul>${repositoriesItens}</ul>
                                             </div>`
         } this.renderEvents(user.events)
     },
-    renderEvents(events){
-    let eventsItens = ''
+    renderEvents(events) {
+        let eventsItens = ''
 
-        events.forEach( (event) => { 
-            if(event.payload.commits){
+        events.forEach((event) => {
+            if (event.payload.commits) {
                 eventsItens += `<li><a href="#"><span class="repo-name">${event.repo.name}</span> -> ${event.payload.commits[0].message}</a></li>`
             }
         })
 
-        if(events.length > 0){
+        if (events.length > 0) {
             this.userProfile.innerHTML += `<div class="events section">
                                                 <h2>Eventos</h2>
                                                 <ul>${eventsItens}</ul>
                                            </div>`
         }
     },
-    renderNotFound(){
+    renderNotFound() {
         this.userProfile.innerHTML = "<h3>Usuário não encontrado</h3>"
     }
 }
