@@ -86,10 +86,10 @@ const screen = {
         repositoriesSection.appendChild(h2);
 
         const ul = document.createElement('ul');
-
+        ul.className = 'repositories-list';
         repositories.forEach(repo => {
             const li = document.createElement('li');
-
+            li.className = 'repositories-info';
             const a = document.createElement('a');
             a.href = repo.html_url;
             a.target = '_blank';
@@ -97,7 +97,7 @@ const screen = {
             li.appendChild(a);
 
             const repoInfoUl = document.createElement('ul');
-            repoInfoUl.className = 'repositories-info';
+
 
             const forksLi = document.createElement('li');
             forksLi.textContent = `🍴 ${repo.forks}`;

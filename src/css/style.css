@@ -206,7 +206,6 @@ section{
     justify-content: center;
 }
   
-.container .profile-data .repositories ul li a,
 .container .profile-data .events ul li a{
     padding: 20px;
     border: 1px solid grey;  
@@ -216,7 +215,6 @@ section{
     transition: 0.3s ease-in-out;
 }
   
-.container .profile-data .repositories ul li a:hover,
 .container .profile-data .events ul li a:hover{
     background-color:#d87093;
     border: 1px solid #fff;
@@ -227,15 +225,36 @@ section{
     display: none;
 }
 
+
 /* REPOSITORIES INFO */
+.repositories-list{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
 .repositories-info{
     border: 1px solid gray;
     border-radius: 5px;
-    margin: 10px;
+    width: 400px;
+    padding: 2em 1em;
+    font-size: 1em;
+}
+.repositories-info a{
+    font-size: 1.25em;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    color: #000;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
 }
 
-.repositories-info li{
-    padding: 2px 15px;
+.repositories-info:hover{
+    background-color: #d87093;
+    color: #fff;
 }
 
 /* EVENTS */
