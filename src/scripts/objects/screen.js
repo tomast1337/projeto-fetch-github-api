@@ -140,7 +140,7 @@ const screen = {
                 const li = document.createElement('li');
                 const a = document.createElement('a');
                 a.href = '#';
-                a.innerHTML = `<span class="repo-name">${event.repo.name}</span> -> ${event.payload.commits[0].message}`;
+                a.innerHTML = `<span class="repo-name">${event.repo.name}</span> → ${event.payload.commits[0].message}`;
                 li.appendChild(a);
                 ul.appendChild(li);
             }
