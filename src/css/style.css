@@ -5,6 +5,9 @@ body{
     font-family: "Kumbh Sans", sans-serif;  
     text-align: center;
     padding-bottom: 100px;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
 }
   
 main{
@@ -12,6 +15,34 @@ main{
     justify-content: center;
     flex-direction: column;
     padding: 50px 0 0;
+   
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #24292e;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+footer a{
+    color: #d87093;
+    text-decoration: none;
+}
+
+footer a:hover{
+    color: #24292e;
+}
+
+footer p{
+    margin: 10px;
+}
+
+footer p{
+    margin: 0;
 }
 
 .devicon-github-original{
