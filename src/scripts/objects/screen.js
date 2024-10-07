@@ -13,68 +13,141 @@ const screen = {
     },
 
     renderProfileInfo(user) {
-        const profileInfo = `
-            <div class="info">
-                <img src="${user.avatarUrl}" alt="Foto do perfil do usuário" />
-                <div class="data">
-                    <h1>${user.name ?? 'Não possui nome cadastrado 😿'}</h1>
-                    <p>${user.bio ?? 'Não possui bio cadastrada 😿'}</p>
-                </div>
-                <div class="followers-following">
-                    <h2>Followers</h2>
-                    <ul>
-                        <li>
-                            <span class="number">${user.followers}</span>
-                            <span class="followers">Followers</span>
-                        </li>
-                        <li>
-                            <span class="number">${user.following}</span>
-                            <span class="following">Following</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>`;
-        this.userProfile.innerHTML = profileInfo;
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'info';
+
+        const img = document.createElement('img');
+        img.src = user.avatarUrl;
+        img.alt = 'Foto do perfil do usuário';
+        infoDiv.appendChild(img);
+
+        const dataDiv = document.createElement('div');
+        dataDiv.className = 'data';
+
+        const nameH1 = document.createElement('h1');
+        nameH1.textContent = user.name ?? 'Não possui nome cadastrado 😿';
+        dataDiv.appendChild(nameH1);
+
+        const bioP = document.createElement('p');
+        bioP.textContent = user.bio ?? 'Não possui bio cadastrada 😿';
+        dataDiv.appendChild(bioP);
+
+        infoDiv.appendChild(dataDiv);
+
+        const followersFollowingDiv = document.createElement('div');
+        followersFollowingDiv.className = 'followers-following';
+
+        const followersH2 = document.createElement('h2');
+        followersH2.textContent = 'Followers';
+        followersFollowingDiv.appendChild(followersH2);
+
+        const ul = document.createElement('ul');
+
+        const followersLi = document.createElement('li');
+        const followersSpanNumber = document.createElement('span');
+        followersSpanNumber.className = 'number';
+        followersSpanNumber.textContent = user.followers;
+        followersLi.appendChild(followersSpanNumber);
+
+        const followersSpanText = document.createElement('span');
+        followersSpanText.className = 'followers';
+        followersSpanText.textContent = 'Followers';
+        followersLi.appendChild(followersSpanText);
+
+        ul.appendChild(followersLi);
+
+        const followingLi = document.createElement('li');
+        const followingSpanNumber = document.createElement('span');
+        followingSpanNumber.className = 'number';
+        followingSpanNumber.textContent = user.following;
+        followingLi.appendChild(followingSpanNumber);
+
+        const followingSpanText = document.createElement('span');
+        followingSpanText.className = 'following';
+        followingSpanText.textContent = 'Following';
+        followingLi.appendChild(followingSpanText);
+
+        ul.appendChild(followingLi);
+
+        followersFollowingDiv.appendChild(ul);
+        infoDiv.appendChild(followersFollowingDiv);
+
+        this.userProfile.appendChild(infoDiv);
     },
 
     renderRepositories(repositories) {
         if (repositories.length === 0) return;
 
-        let repositoriesItems = repositories.map(repo => `
-            <li>
-                <a href="${repo.html_url}" target="_blank">${repo.name}</a>
-                <ul class="repositories-info">
-                    <li>🍴 ${repo.forks}</li>
-                    <li>⭐ ${repo.stars ?? '0'}</li>
-                    <li>👀 ${repo.watchers}</li>
-                    <li>💻 ${repo.language ?? 'Sem linguagem'}</li>
-                </ul>
-            </li>`).join('');
+        const repositoriesSection = document.createElement('div');
+        repositoriesSection.className = 'repositories section';
 
-        const repositoriesSection = `
-            <div class="repositories section">
-                <h2>Repositórios</h2>
-                <ul>${repositoriesItems}</ul>
-            </div>`;
-        this.userProfile.innerHTML += repositoriesSection;
+        const h2 = document.createElement('h2');
+        h2.textContent = 'Repositórios';
+        repositoriesSection.appendChild(h2);
+
+        const ul = document.createElement('ul');
+
+        repositories.forEach(repo => {
+            const li = document.createElement('li');
+
+            const a = document.createElement('a');
+            a.href = repo.html_url;
+            a.target = '_blank';
+            a.textContent = repo.name;
+            li.appendChild(a);
+
+            const repoInfoUl = document.createElement('ul');
+            repoInfoUl.className = 'repositories-info';
+
+            const forksLi = document.createElement('li');
+            forksLi.textContent = `🍴 ${repo.forks}`;
+            repoInfoUl.appendChild(forksLi);
+
+            const starsLi = document.createElement('li');
+            starsLi.textContent = `⭐ ${repo.stars ?? '0'}`;
+            repoInfoUl.appendChild(starsLi);
+
+            const watchersLi = document.createElement('li');
+            watchersLi.textContent = `👀 ${repo.watchers}`;
+            repoInfoUl.appendChild(watchersLi);
+
+            const languageLi = document.createElement('li');
+            languageLi.textContent = `💻 ${repo.language ?? 'Sem linguagem'}`;
+            repoInfoUl.appendChild(languageLi);
+
+            li.appendChild(repoInfoUl);
+            ul.appendChild(li);
+        });
+
+        repositoriesSection.appendChild(ul);
+        this.userProfile.appendChild(repositoriesSection);
     },
 
     renderEvents(events) {
         if (events.length === 0) return;
 
-        let eventsItems = events.map(event => {
-            if (event.payload.commits) {
-                return `<li><a href="#"><span class="repo-name">${event.repo.name}</span> -> ${event.payload.commits[0].message}</a></li>`;
-            }
-            return '';
-        }).join('');
+        const eventsSection = document.createElement('div');
+        eventsSection.className = 'events section';
 
-        const eventsSection = `
-            <div class="events section">
-                <h2>Eventos</h2>
-                <ul>${eventsItems}</ul>
-            </div>`;
-        this.userProfile.innerHTML += eventsSection;
+        const h2 = document.createElement('h2');
+        h2.textContent = 'Eventos';
+        eventsSection.appendChild(h2);
+
+        const ul = document.createElement('ul');
+
+        events.forEach(event => {
+            if (event.payload.commits) {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#';
+                a.innerHTML = `<span class="repo-name">${event.repo.name}</span> -> ${event.payload.commits[0].message}`;
+                li.appendChild(a);
+                ul.appendChild(li);
+            }
+        });
+
+        eventsSection.appendChild(ul);
+        this.userProfile.appendChild(eventsSection);
     },
 
     renderNotFound() {
